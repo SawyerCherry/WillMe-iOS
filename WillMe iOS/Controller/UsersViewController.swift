@@ -17,7 +17,8 @@ class UsersViewController: UIViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<PersonalInfo> = {
         let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
         // Put sort descriptors here later
-//        fetchRequest.sortDescriptors = []
+        let nameSort = NSSortDescriptor(key: "firstName", ascending: true)
+        fetchRequest.sortDescriptors = [nameSort]
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -55,26 +56,31 @@ class UsersViewController: UIViewController {
             print(error)
         }
         
+        self.navigationItem.rightBarButtonItem = addUserButton
+        setupTableView()
         
+        
+    }
+    func setupTableView() {
+        self.view.addSubview(usersTableView)
+        
+        NSLayoutConstraint.activate([
+            usersTableView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
+            usersTableView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
+            usersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            usersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        ])
     }
     
     @objc func addUserButtonPressed() {
-        print("Create New User")
+        let nextVC = SetupProfileViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
-//    func setupUser() {
-//        if firstLaunch ==  true {
-//            userInsurance = Insurance(context: managedContext)
-//            userInsurance.hasInsurance = false
-//            userFuneralHome = FuneralHome(context: managedContext)
-//            userFuneralHome.preNeedsSet = false
-//        } else {
-//            userInsurance = currentUser.insurance
-//            userFuneralHome = currentUser.funeralHome
-//        }
-    
 
+    
 }
+
+
 
 extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

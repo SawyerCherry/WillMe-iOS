@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5010797C26991E1100F6BBD3 /* WillMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5010797A26991E1100F6BBD3 /* WillMe.xcdatamodeld */; };
+		F21DF63F269E11360061D6CA /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DF63E269E11360061D6CA /* SetupProfileViewController.swift */; };
 		F288E3EA269537120041C146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3E9269537120041C146 /* AppDelegate.swift */; };
 		F288E3EC269537120041C146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3EB269537120041C146 /* SceneDelegate.swift */; };
 		F288E3EE269537120041C146 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3ED269537120041C146 /* UsersViewController.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		5010797B26991E1100F6BBD3 /* WillMe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WillMe.xcdatamodel; sourceTree = "<group>"; };
+		F21DF63E269E11360061D6CA /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		F288E3E6269537120041C146 /* WillMe iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WillMe iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F288E3E9269537120041C146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F288E3EB269537120041C146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F21DF640269E11460061D6CA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F21DF63E269E11360061D6CA /* SetupProfileViewController.swift */,
+				F288E3ED269537120041C146 /* UsersViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		F288E3DD269537120041C146 = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +67,9 @@
 		F288E3E8269537120041C146 /* WillMe iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F21DF640269E11460061D6CA /* Controller */,
 				F288E3E9269537120041C146 /* AppDelegate.swift */,
 				F288E3EB269537120041C146 /* SceneDelegate.swift */,
-				F288E3ED269537120041C146 /* UsersViewController.swift */,
 				F288E3F5269537130041C146 /* Assets.xcassets */,
 				F288E3F7269537130041C146 /* LaunchScreen.storyboard */,
 				5010797A26991E1100F6BBD3 /* WillMe.xcdatamodeld */,
@@ -139,6 +150,7 @@
 				F288E3EE269537120041C146 /* UsersViewController.swift in Sources */,
 				5010797C26991E1100F6BBD3 /* WillMe.xcdatamodeld in Sources */,
 				F288E3EA269537120041C146 /* AppDelegate.swift in Sources */,
+				F21DF63F269E11360061D6CA /* SetupProfileViewController.swift in Sources */,
 				F288E3EC269537120041C146 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
