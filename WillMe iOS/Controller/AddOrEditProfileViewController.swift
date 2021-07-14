@@ -14,7 +14,7 @@ class AddOrEditProfileViewController: UIViewController {
     var managedContext: NSManagedObjectContext!
     
     var adding: Bool!
-    var person: PersonalInfo!
+    var user: PersonalInfo!
     
     let container: UIStackView = {
         let container = UIStackView()
@@ -91,7 +91,7 @@ class AddOrEditProfileViewController: UIViewController {
     convenience init(user: PersonalInfo, adding: Bool) {
         self.init()
         self.adding = adding
-        self.person = user
+        self.user = user
         if adding == false {
             // Make it all EDITING
         } else {
@@ -100,15 +100,13 @@ class AddOrEditProfileViewController: UIViewController {
     }
     
     @objc func saveButtonPressed() {
-        person.firstName = firstNameField.text
-        person.lastName = lastNameField.text
-        person.ssn = ssnField.text
-        person.dateOfBirth = dOBField.date
-        person.tasksCompleted = 4
+        user.firstName = firstNameField.text
+        user.lastName = lastNameField.text
+        user.ssn = ssnField.text
+        user.dateOfBirth = dOBField.date
+        user.tasksCompleted = 4
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-           return
-        }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         appDelegate.saveContext()
         

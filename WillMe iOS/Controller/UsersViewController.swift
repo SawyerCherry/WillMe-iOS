@@ -53,7 +53,7 @@ class UsersViewController: UIViewController {
             print(error)
         }
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create Profile", style: .plain, target: self, action: #selector(addUserButtonPressed) )
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create Profile", style: .plain, target: self, action: #selector(addUserButtonPressed))
         setupTableView()
         
         
@@ -89,8 +89,15 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
         let user = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = "\(user.firstName ?? "name missing") \(user.lastName ?? "last name missing")"
-        cell.detailTextLabel?.text = "\(user.tasksCompleted) tasks completed"
+        cell.detailTextLabel?.text = "Hello? Is this working?"
+//        cell.detailTextLabel?.text = "\(user.tasksCompleted) tasks completed"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = fetchedResultsController.object(at: indexPath)
+        let nextVC = UserDetailViewController(user: user)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }
