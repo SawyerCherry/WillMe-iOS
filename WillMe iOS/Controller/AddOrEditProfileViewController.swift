@@ -8,11 +8,13 @@
 import UIKit
 import CoreData
 
-class SetupProfileViewController: UIViewController {
+class AddOrEditProfileViewController: UIViewController {
     
-    var appDelegate: AppDelegate!
+//    var appDelegate: AppDelegate!
     var managedContext: NSManagedObjectContext!
     
+    var adding: Bool!
+    var person: PersonalInfo!
     
     let container: UIStackView = {
         let container = UIStackView()
@@ -77,16 +79,38 @@ class SetupProfileViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Create Profile"
         self.view.backgroundColor = .white
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        managedContext = appDelegate.persistentContainer.viewContext
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            fatalError("wtf")
+//        }
+//        managedContext = appDelegate.persistentContainer.viewContext
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
         setupUI()
         
     }
     
+    convenience init(user: PersonalInfo, adding: Bool) {
+        self.init()
+        self.adding = adding
+        self.person = user
+        if adding == false {
+            // Make it all EDITING
+        } else {
+            return
+        }
+    }
+    
     @objc func saveButtonPressed() {
-        self.navigationController?.topViewController?.dismiss(animated: true, completion: nil)
+        person.firstName = firstNameField.text
+        person.lastName = lastNameField.text
+        person.ssn = ssnField.text
+        person.dateOfBirth = dOBField.date
         
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("wtf")
+        }
+        appDelegate.saveContext()
+        
+        self.navigationController?.popViewController(animated: true)
     }
 
     

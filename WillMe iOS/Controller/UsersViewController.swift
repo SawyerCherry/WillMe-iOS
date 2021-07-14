@@ -70,7 +70,8 @@ class UsersViewController: UIViewController {
     }
     
     @objc func addUserButtonPressed() {
-        let nextVC = SetupProfileViewController()
+        let newPerson = PersonalInfo(context: managedContext)
+        let nextVC = AddOrEditProfileViewController(user: newPerson, adding: true)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 
