@@ -96,7 +96,6 @@ class UserDetailViewController: UIViewController {
         return lbl
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Your Information"
