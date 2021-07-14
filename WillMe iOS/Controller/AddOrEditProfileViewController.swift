@@ -104,10 +104,12 @@ class AddOrEditProfileViewController: UIViewController {
         person.lastName = lastNameField.text
         person.ssn = ssnField.text
         person.dateOfBirth = dOBField.date
+        person.tasksCompleted = 4
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("wtf")
+           return
         }
+        
         appDelegate.saveContext()
         
         self.navigationController?.popViewController(animated: true)
@@ -118,10 +120,6 @@ class AddOrEditProfileViewController: UIViewController {
         self.view.addSubview(container)
     
         NSLayoutConstraint.activate ([
-//            container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            container.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.8),
-//            container.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8)
             container.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100),
             container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             container.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 5),

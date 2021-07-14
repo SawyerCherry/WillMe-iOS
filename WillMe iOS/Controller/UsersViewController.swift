@@ -79,7 +79,6 @@ class UsersViewController: UIViewController {
 }
 
 
-
 extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionInfo = fetchedResultsController.sections?[section] else {return 0}
@@ -88,6 +87,9 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
+        let user = fetchedResultsController.object(at: indexPath)
+        cell.textLabel?.text = "\(user.firstName ?? "name missing") \(user.lastName ?? "last name missing")"
+        cell.detailTextLabel?.text = "\(user.tasksCompleted) tasks completed"
         return cell
     }
     

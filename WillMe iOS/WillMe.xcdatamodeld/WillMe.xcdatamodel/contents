@@ -7,9 +7,9 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonalInfo" inverseName="funeralHome" inverseEntity="PersonalInfo"/>
     </entity>
     <entity name="Insurance" representedClassName="Insurance" parentEntity="PersonalInfo" syncable="YES" codeGenerationType="class">
-        <attribute name="hasInsurance" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="policyNumber" optional="YES" attributeType="String"/>
         <attribute name="providerLink" optional="YES" attributeType="URI"/>
+        <attribute name="providerName" optional="YES" attributeType="String"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonalInfo" inverseName="insurance" inverseEntity="PersonalInfo"/>
     </entity>
     <entity name="PersonalInfo" representedClassName="PersonalInfo" syncable="YES" codeGenerationType="class">
@@ -18,12 +18,13 @@
         <attribute name="inProgress" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="ssn" optional="YES" attributeType="String"/>
+        <attribute name="tasksCompleted" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="funeralHome" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FuneralHome" inverseName="user" inverseEntity="FuneralHome"/>
         <relationship name="insurance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Insurance" inverseName="user" inverseEntity="Insurance"/>
     </entity>
     <elements>
         <element name="FuneralHome" positionX="-36" positionY="45" width="128" height="89"/>
         <element name="Insurance" positionX="-54" positionY="18" width="128" height="89"/>
-        <element name="PersonalInfo" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="PersonalInfo" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>
