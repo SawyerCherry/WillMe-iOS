@@ -31,11 +31,18 @@ class UserDetailViewController: UIViewController {
         let container = UIStackView()
         container.axis = .vertical
         container.spacing = 0
-        container.distribution = .fillEqually
+        container.distribution = .equalSpacing
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
     
+    var userStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let nameLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +51,6 @@ class UserDetailViewController: UIViewController {
         lbl.font = UIFont(name: "Helvetica-Light", size: 30.0)
         return lbl
     }()
-    
     let dOBLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +59,6 @@ class UserDetailViewController: UIViewController {
         lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
-    
     let ssnLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -63,15 +68,22 @@ class UserDetailViewController: UIViewController {
         return lbl
     }()
     
+    var insuranceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let insuranceLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Insurance Provider:"
-        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 23.0)
         return lbl
     }()
-    
     let insuranceNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -83,15 +95,22 @@ class UserDetailViewController: UIViewController {
         return lbl
     }()
     
+    var funeralStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let funeralHomeLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Funeral Home:"
-        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 23.0)
         return lbl
     }()
-    
     let funeralHomeNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -133,13 +152,13 @@ class UserDetailViewController: UIViewController {
 
     
     func setupUserInfo() {
-        guard let firstName = user.firstName, let lastName = user.lastName, let dateOfBirth = user.dateOfBirth, let ssn = user.ssn else {
+        guard let firstName = user.firstName, let lastName = user.lastName, let dateOfBirth = user.dateOfBirth, let _ = user.ssn else {
             print("Error fetching user info")
             return
         }
         nameLabel.text = "\(firstName) \(lastName)"
         dOBLabel.text = "Date Of Birth: \(dateFormatter.string(from: dateOfBirth))"
-        ssnLabel.text = "Social Security #: \(ssn)"
+        ssnLabel.text = "Social Security Number Saved"
         
         if let userInsurance = user.insurance {
             insuranceNameLabel.text = userInsurance.providerName
@@ -170,19 +189,35 @@ class UserDetailViewController: UIViewController {
         self.view.addSubview(container)
     
         NSLayoutConstraint.activate ([
-            container.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+//            container.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100),
+//            container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            container.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor, constant: -60),
+            container.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55),
             container.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 5),
             container.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -5),
         ])
         
-        container.addArrangedSubview(nameLabel)
-        container.addArrangedSubview(dOBLabel)
-        container.addArrangedSubview(ssnLabel)
-        container.addArrangedSubview(insuranceLabel)
-        container.addArrangedSubview(insuranceNameLabel)
-        container.addArrangedSubview(funeralHomeLabel)
-        container.addArrangedSubview(funeralHomeNameLabel)
+        container.addArrangedSubview(userStackView)
+        container.addArrangedSubview(insuranceStackView)
+        container.addArrangedSubview(funeralStackView)
+
+        userStackView.addArrangedSubview(nameLabel)
+        userStackView.addArrangedSubview(dOBLabel)
+        userStackView.addArrangedSubview(ssnLabel)
+        
+        insuranceStackView.addArrangedSubview(insuranceLabel)
+        insuranceStackView.addArrangedSubview(insuranceNameLabel)
+        
+        funeralStackView.addArrangedSubview(funeralHomeLabel)
+        funeralStackView.addArrangedSubview(funeralHomeNameLabel)
+        
+//        container.addArrangedSubview(nameLabel)
+//        container.addArrangedSubview(dOBLabel)
+//        container.addArrangedSubview(ssnLabel)
+//        container.addArrangedSubview(insuranceLabel)
+//        container.addArrangedSubview(insuranceNameLabel)
+//        container.addArrangedSubview(funeralHomeLabel)
+//        container.addArrangedSubview(funeralHomeNameLabel)
     }
     
     // MARK: - Objc Button Functions

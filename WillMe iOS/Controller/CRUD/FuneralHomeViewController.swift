@@ -22,6 +22,7 @@ class FuneralHomeViewController: UIViewController {
         container.axis = .vertical
         container.spacing = 20
         container.distribution = .equalSpacing
+        container.alignment = .center
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
@@ -39,6 +40,9 @@ class FuneralHomeViewController: UIViewController {
         first.translatesAutoresizingMaskIntoConstraints = false
         first.textAlignment = .center
         first.placeholder = "Funeral Home Name"
+        first.backgroundColor = UIColor(named: "darkSeaBlue")
+        first.font = UIFont(name: "Helvetica-Light", size: 24.0)
+        first.layer.cornerRadius = 10
         return first
     }()
     
@@ -131,7 +135,7 @@ class FuneralHomeViewController: UIViewController {
             preneedsControl.bottomAnchor.constraint(equalTo: needsStack.bottomAnchor, constant: -80.0),
             preneedsLabel.topAnchor.constraint(equalTo: needsStack.topAnchor, constant: 50.0),
             preneedsLabel.bottomAnchor.constraint(equalTo: needsStack.bottomAnchor, constant: -50.0),
-            
+            funeralHomeField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.7)
         ])
                 
     }

@@ -22,42 +22,63 @@ class InsuranceViewController: UIViewController {
         let container = UIStackView()
         container.axis = .vertical
         container.spacing = 0
-        container.distribution = .fillEqually
+        container.distribution = .equalSpacing
+        container.alignment = .center
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
     
+    var providerStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let providerLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Provider Name"
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 30.0)
         return lbl
     }()
-    
     let providerField: UITextField = {
         let first = UITextField()
         first.translatesAutoresizingMaskIntoConstraints = false
         first.textAlignment = .center
         first.placeholder = "Provider Name"
+        first.backgroundColor = UIColor(named: "darkSeaBlue")
+        first.font = UIFont(name: "Helvetica-Light", size: 24.0)
+        first.layer.cornerRadius = 10
         return first
     }()
     
+    var policyStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let policyNumLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Policy Number"
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 30.0)
         return lbl
     }()
-    
     let policyNumField: UITextField = {
         let first = UITextField()
         first.translatesAutoresizingMaskIntoConstraints = false
         first.textAlignment = .center
         first.placeholder = "Policy Number"
+        first.backgroundColor = UIColor(named: "darkSeaBlue")
+        first.font = UIFont(name: "Helvetica-Light", size: 24.0)
+        first.layer.cornerRadius = 10
         return first
     }()
     
@@ -97,15 +118,21 @@ class InsuranceViewController: UIViewController {
         self.view.addSubview(container)
     
         NSLayoutConstraint.activate ([
-            container.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            container.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor, constant: -60),
+            container.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
             container.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 5),
             container.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -5),
         ])
-        container.addArrangedSubview(providerLabel)
-        container.addArrangedSubview(providerField)
-        container.addArrangedSubview(policyNumLabel)
-        container.addArrangedSubview(policyNumField)
+        
+        container.addArrangedSubview(providerStack)
+        container.addArrangedSubview(policyStack)
+        
+        providerStack.addArrangedSubview(providerLabel)
+        providerStack.addArrangedSubview(providerField)
+        providerField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.7).isActive = true
+        policyStack.addArrangedSubview(policyNumLabel)
+        policyStack.addArrangedSubview(policyNumField)
+        policyNumField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.7).isActive = true
     }
    
     @objc func saveButtonPressed() {
