@@ -9,11 +9,16 @@ import UIKit
 import CoreData
 class UserDetailViewController: UIViewController {
     
-    lazy var editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonPressed))
+    // MARK: - CoreData
+    var appDelegate: AppDelegate!
+    var managedContext: NSManagedObjectContext!
     
     var user: PersonalInfo!
     var insurance: Insurance!
     var funeralHome: FuneralHome!
+    
+    
+    lazy var editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonPressed))
     
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -101,8 +106,10 @@ class UserDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Your Information"
-        
         self.view.backgroundColor = .systemBackground
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        managedContext = appDelegate.persistentContainer.viewContext
        
         setupUI()
         setupUserInfo()
@@ -168,32 +175,32 @@ class UserDetailViewController: UIViewController {
         
     }
     
+    // MARK: - Objc Button Functions
     @objc func editButtonPressed() {
         let nextVC = PersonalInfoViewController(user: user, adding: false)
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    /// To insurance detail view
     @objc func newInsuranceLabelPressed() {
 //        let newPerson = PersonalInfo(context: managedContext)
         let nextVC = InsuranceViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
-    @objc func newFuneralHomePressed() {
-//        let newPerson = PersonalInfo(context: managedContext)
-        let nextVC = FuneralHomeViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
     @objc func existingInsuranceLabelPressed() {
 //        let newPerson = PersonalInfo(context: managedContext)
         let nextVC = InsuranceViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    /// To funeral home detail view
+    @objc func newFuneralHomePressed() {
+        let newFuneralHome = FuneralHome(context: managedContext)
+        let nextVC = FuneralHomeViewController(user: user, funeralHome: newFuneralHome, adding: true)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
     @objc func existingFuneralHomePressed() {
-//        let newPerson = PersonalInfo(context: managedContext)
-        let nextVC = FuneralHomeViewController()
+        let nextVC = FuneralHomeViewController(user: user, funeralHome: funeralHome, adding: false)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

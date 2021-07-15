@@ -8,8 +8,10 @@
 import UIKit
 
 class FuneralHomeViewController: UIViewController {
-
+    
+    var user: PersonalInfo!
     var funeralHome: FuneralHome!
+    var adding: Bool = true
     
     let container: UIStackView = {
         let container = UIStackView()
@@ -71,7 +73,24 @@ class FuneralHomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    convenience init(user: PersonalInfo, funeralHome: FuneralHome, adding: Bool) {
+        self.init()
+        self.user = user
+        self.funeralHome = funeralHome
+        self.adding = adding
+        
+        if !adding {
+            funeralHomeField.text = funeralHome.homeName
+//            preneedsControl
+        }
+        return
+    }
+    
     private func setupUI(){
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
         
         self.view.addSubview(container)
         self.view.addSubview(needsStack)
@@ -101,11 +120,14 @@ class FuneralHomeViewController: UIViewController {
             
         ])
         
-       
-
+    }
+    
+    @objc func saveButtonPressed() {
         
     }
     
-
+    @objc func back(sender: UIBarButtonItem) {
+        
+    }
 
 }
