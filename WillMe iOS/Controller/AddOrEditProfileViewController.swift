@@ -11,7 +11,7 @@ import CoreData
 class AddOrEditProfileViewController: UIViewController {
     
 //    var appDelegate: AppDelegate!
-    var managedContext: NSManagedObjectContext!
+//    var managedContext: NSManagedObjectContext!
     
     var adding: Bool!
     var user: PersonalInfo!
@@ -80,11 +80,8 @@ class AddOrEditProfileViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Create Profile"
         self.view.backgroundColor = .white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
+        
         setupUI()
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     convenience init(user: PersonalInfo, adding: Bool) {
@@ -106,20 +103,29 @@ class AddOrEditProfileViewController: UIViewController {
         user.tasksCompleted = 4
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
         appDelegate.saveContext()
         
         self.navigationController?.popViewController(animated: true)
     }
+    
     @objc func back(sender: UIBarButtonItem) {
             // Perform your custom actions
             // To do: delete Personal Info Here
-            // Go back to the previous ViewController
-            _ = navigationController?.popViewController(animated: true)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        if adding {
+            managedContext.delete(user)
+        }
+        navigationController?.popViewController(animated: true)
     }
 
     
     func setupUI(){
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
         self.view.addSubview(container)
     
         NSLayoutConstraint.activate ([
