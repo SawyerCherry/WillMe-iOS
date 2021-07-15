@@ -10,7 +10,7 @@
 		5004A8C8269E86BD00A621DF /* InsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5004A8C7269E86BD00A621DF /* InsuranceViewController.swift */; };
 		5004A8CA269E86F900A621DF /* FuneralHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5004A8C9269E86F900A621DF /* FuneralHomeViewController.swift */; };
 		5010797C26991E1100F6BBD3 /* WillMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5010797A26991E1100F6BBD3 /* WillMe.xcdatamodeld */; };
-		F21DF63F269E11360061D6CA /* AddOrEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DF63E269E11360061D6CA /* AddOrEditProfileViewController.swift */; };
+		F21DF63F269E11360061D6CA /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DF63E269E11360061D6CA /* PersonalInfoViewController.swift */; };
 		F21DF647269E7C5D0061D6CA /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DF646269E7C5D0061D6CA /* UserDetailViewController.swift */; };
 		F288E3EA269537120041C146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3E9269537120041C146 /* AppDelegate.swift */; };
 		F288E3EC269537120041C146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3EB269537120041C146 /* SceneDelegate.swift */; };
@@ -23,7 +23,7 @@
 		5004A8C7269E86BD00A621DF /* InsuranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceViewController.swift; sourceTree = "<group>"; };
 		5004A8C9269E86F900A621DF /* FuneralHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralHomeViewController.swift; sourceTree = "<group>"; };
 		5010797B26991E1100F6BBD3 /* WillMe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WillMe.xcdatamodel; sourceTree = "<group>"; };
-		F21DF63E269E11360061D6CA /* AddOrEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditProfileViewController.swift; sourceTree = "<group>"; };
+		F21DF63E269E11360061D6CA /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
 		F21DF646269E7C5D0061D6CA /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		F288E3E6269537120041C146 /* WillMe iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WillMe iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F288E3E9269537120041C146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		F21DF640269E11460061D6CA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F21DF63E269E11360061D6CA /* AddOrEditProfileViewController.swift */,
+				F21DF63E269E11360061D6CA /* PersonalInfoViewController.swift */,
 				F288E3ED269537120041C146 /* UsersViewController.swift */,
 				F21DF646269E7C5D0061D6CA /* UserDetailViewController.swift */,
 				5004A8C7269E86BD00A621DF /* InsuranceViewController.swift */,
@@ -161,7 +161,7 @@
 				F21DF647269E7C5D0061D6CA /* UserDetailViewController.swift in Sources */,
 				5004A8C8269E86BD00A621DF /* InsuranceViewController.swift in Sources */,
 				F288E3EA269537120041C146 /* AppDelegate.swift in Sources */,
-				F21DF63F269E11360061D6CA /* AddOrEditProfileViewController.swift in Sources */,
+				F21DF63F269E11360061D6CA /* PersonalInfoViewController.swift in Sources */,
 				F288E3EC269537120041C146 /* SceneDelegate.swift in Sources */,
 				5004A8CA269E86F900A621DF /* FuneralHomeViewController.swift in Sources */,
 			);

@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class AddOrEditProfileViewController: UIViewController {
+class PersonalInfoViewController: UIViewController {
     
 //    var appDelegate: AppDelegate!
 //    var managedContext: NSManagedObjectContext!
@@ -89,7 +89,10 @@ class AddOrEditProfileViewController: UIViewController {
         self.adding = adding
         self.user = user
         if !adding {
-            // Make it all EDITING
+            firstNameField.text = user.firstName
+            lastNameField.text = user.lastName
+            ssnField.text = user.ssn
+            dOBField.date = user.dateOfBirth!
         } else {
             return
         }
@@ -100,7 +103,10 @@ class AddOrEditProfileViewController: UIViewController {
         user.lastName = lastNameField.text
         user.ssn = ssnField.text
         user.dateOfBirth = dOBField.date
-        user.tasksCompleted = 4
+        
+        if adding{
+            user.tasksCompleted = 4
+        }
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         appDelegate.saveContext()

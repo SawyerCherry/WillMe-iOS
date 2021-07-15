@@ -167,7 +167,8 @@ class UserDetailViewController: UIViewController {
     }
     
     @objc func editButtonPressed() {
-        
+        let nextVC = PersonalInfoViewController(user: user, adding: false)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc func newInsuranceLabelPressed() {

@@ -42,6 +42,7 @@ class UsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.systemBackground
         self.title = "Home"
         // Create our managed context object by getting the context from the persistent container in the shared AppDelegae
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -71,7 +72,7 @@ class UsersViewController: UIViewController {
     
     @objc func addUserButtonPressed() {
         let newPerson = PersonalInfo(context: managedContext)
-        let nextVC = AddOrEditProfileViewController(user: newPerson, adding: true)
+        let nextVC = PersonalInfoViewController(user: newPerson, adding: true)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 

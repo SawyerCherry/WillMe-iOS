@@ -41,7 +41,7 @@ class FuneralHomeViewController: UIViewController {
         container.spacing = 0
         container.distribution = .equalSpacing
         container.alignment = .center
-        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
