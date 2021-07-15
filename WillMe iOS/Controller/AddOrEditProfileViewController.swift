@@ -20,6 +20,8 @@ class AddOrEditProfileViewController: UIViewController {
         let container = UIStackView()
         container.axis = .vertical
         container.spacing = 0
+        container.alignment = .center
+        
         container.distribution = .fillEqually
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
@@ -62,7 +64,6 @@ class AddOrEditProfileViewController: UIViewController {
     lazy var dOBField: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.translatesAutoresizingMaskIntoConstraints = false
-//        datePicker.frame = CGRect(x: 10, y: 50, width: self.view.frame.width, height: 200)
         datePicker.datePickerMode = .date
         let calendar = Calendar(identifier: .gregorian)
         var comps = DateComponents()
@@ -79,20 +80,18 @@ class AddOrEditProfileViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Create Profile"
         self.view.backgroundColor = .white
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            fatalError("wtf")
-//        }
-//        managedContext = appDelegate.persistentContainer.viewContext
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
         setupUI()
-        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     convenience init(user: PersonalInfo, adding: Bool) {
         self.init()
         self.adding = adding
         self.user = user
-        if adding == false {
+        if !adding {
             // Make it all EDITING
         } else {
             return
@@ -111,6 +110,12 @@ class AddOrEditProfileViewController: UIViewController {
         appDelegate.saveContext()
         
         self.navigationController?.popViewController(animated: true)
+    }
+    @objc func back(sender: UIBarButtonItem) {
+            // Perform your custom actions
+            // To do: delete Personal Info Here
+            // Go back to the previous ViewController
+            _ = navigationController?.popViewController(animated: true)
     }
 
     

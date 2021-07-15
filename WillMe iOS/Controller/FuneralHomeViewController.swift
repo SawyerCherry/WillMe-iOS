@@ -40,6 +40,7 @@ class FuneralHomeViewController: UIViewController {
         container.axis = .horizontal
         container.spacing = 0
         container.distribution = .equalSpacing
+        container.alignment = .center
         container.heightAnchor.constraint(equalToConstant: 50).isActive = true
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
@@ -84,7 +85,7 @@ class FuneralHomeViewController: UIViewController {
         ])
         container.addArrangedSubview(funeralHomeLabel)
         container.addArrangedSubview(funeralHomeField)
-        needsStack.backgroundColor = .blue
+
         needsStack.addArrangedSubview(preneedsLabel)
         needsStack.addArrangedSubview(preneedsControl)
         
