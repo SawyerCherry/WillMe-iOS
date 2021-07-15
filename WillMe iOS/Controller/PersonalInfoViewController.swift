@@ -93,39 +93,9 @@ class PersonalInfoViewController: UIViewController {
             lastNameField.text = user.lastName
             ssnField.text = user.ssn
             dOBField.date = user.dateOfBirth!
-        } else {
-            return
         }
+        return
     }
-    
-    @objc func saveButtonPressed() {
-        user.firstName = firstNameField.text
-        user.lastName = lastNameField.text
-        user.ssn = ssnField.text
-        user.dateOfBirth = dOBField.date
-        
-        if adding{
-            user.tasksCompleted = 4
-        }
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        appDelegate.saveContext()
-        
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func back(sender: UIBarButtonItem) {
-            // Perform your custom actions
-            // To do: delete Personal Info Here
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        if adding {
-            managedContext.delete(user)
-        }
-        navigationController?.popViewController(animated: true)
-    }
-
     
     func setupUI(){
         
@@ -147,6 +117,32 @@ class PersonalInfoViewController: UIViewController {
         container.addArrangedSubview(dOBField)
     }
     
+    @objc func saveButtonPressed() {
+        user.firstName = firstNameField.text
+        user.lastName = lastNameField.text
+        user.ssn = ssnField.text
+        user.dateOfBirth = dOBField.date
+        
+        if adding{
+            user.tasksCompleted = 4
+        }
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        appDelegate.saveContext()
+        
+        self.navigationController?.popViewController(animated: true)
+    }
     
+    @objc func back(sender: UIBarButtonItem) {
 
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        if adding {
+            managedContext.delete(user)
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
 }

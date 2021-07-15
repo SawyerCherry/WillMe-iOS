@@ -101,6 +101,22 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleting")
+            let userToDelete = fetchedResultsController.object(at: indexPath)
+            managedContext.delete(userToDelete)
+            usersTableView.reloadData()
+        } else if editingStyle == .insert {
+            print("How'd you get here?")
+        }
+    }
+    
+    
 }
 
 extension UsersViewController: NSFetchedResultsControllerDelegate {
