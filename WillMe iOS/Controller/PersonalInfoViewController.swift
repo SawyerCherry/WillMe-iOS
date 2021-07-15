@@ -79,8 +79,7 @@ class PersonalInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Create Profile"
-        self.view.backgroundColor = .white
-        
+       
         setupUI()
     }
     
