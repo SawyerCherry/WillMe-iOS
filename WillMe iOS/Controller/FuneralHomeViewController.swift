@@ -14,6 +14,7 @@ class FuneralHomeViewController: UIViewController {
     let container: UIStackView = {
         let container = UIStackView()
         container.axis = .vertical
+        container.spacing = 20
         container.distribution = .equalSpacing
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
@@ -41,7 +42,6 @@ class FuneralHomeViewController: UIViewController {
         container.spacing = 0
         container.distribution = .equalSpacing
         container.alignment = .center
-//        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
@@ -51,7 +51,7 @@ class FuneralHomeViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Have you made arrangements?"
-        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 15.0)
         return lbl
     }()
     
@@ -79,7 +79,7 @@ class FuneralHomeViewController: UIViewController {
     
         NSLayoutConstraint.activate ([
             container.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 45),
-            container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -625),
+//            container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -625),
             container.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 24),
             container.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -24)
         ])
@@ -91,16 +91,18 @@ class FuneralHomeViewController: UIViewController {
         
         NSLayoutConstraint.activate ([
             needsStack.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 125),
-            needsStack.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -275),
+//            needsStack.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -275),
             needsStack.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 24),
             needsStack.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -24),
             preneedsControl.topAnchor.constraint(equalTo: needsStack.topAnchor, constant: 80.0),
             preneedsControl.bottomAnchor.constraint(equalTo: needsStack.bottomAnchor, constant: -80.0),
             preneedsLabel.topAnchor.constraint(equalTo: needsStack.topAnchor, constant: 50.0),
             preneedsLabel.bottomAnchor.constraint(equalTo: needsStack.bottomAnchor, constant: -50.0),
+            
         ])
         
        
+
         
     }
     

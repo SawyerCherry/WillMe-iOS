@@ -18,7 +18,7 @@ class UserDetailViewController: UIViewController {
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        formatter.timeStyle = .short
+        formatter.timeStyle = .none
         return formatter
     }()
     
@@ -36,7 +36,7 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "First Last"
-        lbl.font = UIFont(name: "Helvetica", size: 30.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 30.0)
         return lbl
     }()
     
@@ -45,7 +45,7 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Date Of Birth"
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
     
@@ -54,7 +54,7 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Social Security #"
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
     
@@ -63,7 +63,7 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Insurance Provider:"
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
     
@@ -72,8 +72,9 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Add an Insurance Provider"
+        lbl.textColor = UIColor(named: "spearmint")
         lbl.isUserInteractionEnabled = true
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
     
@@ -82,7 +83,7 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Funeral Home:"
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
     
@@ -91,8 +92,9 @@ class UserDetailViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Add a Funeral Home"
+        lbl.textColor = UIColor(named: "spearmint")
         lbl.isUserInteractionEnabled = true
-        lbl.font = UIFont(name: "Helvetica", size: 20.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 20.0)
         return lbl
     }()
     
@@ -118,8 +120,8 @@ class UserDetailViewController: UIViewController {
             return
         }
         nameLabel.text = "\(firstName) \(lastName)"
-        dOBLabel.text = dateFormatter.string(from: dateOfBirth)
-        ssnLabel.text = ssn
+        dOBLabel.text = "Date Of Birth: \(dateFormatter.string(from: dateOfBirth))"
+        ssnLabel.text = "Social Security #: \(ssn)"
         
         if let userInsurance = user.insurance {
             insuranceNameLabel.text = insurance.providerName
