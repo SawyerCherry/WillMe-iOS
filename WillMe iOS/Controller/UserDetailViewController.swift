@@ -115,6 +115,17 @@ class UserDetailViewController: UIViewController {
         setupUserInfo()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupUserInfo()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        appDelegate.saveContext()
+    }
+    
     convenience init(user: PersonalInfo) {
         self.init()
         self.user = user
@@ -131,7 +142,7 @@ class UserDetailViewController: UIViewController {
         ssnLabel.text = "Social Security #: \(ssn)"
         
         if let userInsurance = user.insurance {
-            insuranceNameLabel.text = insurance.providerName
+            insuranceNameLabel.text = userInsurance.providerName
             self.insurance = userInsurance
             let tapExistingInsurance = UITapGestureRecognizer(target: self, action: #selector(existingInsuranceLabelPressed))
             insuranceNameLabel.addGestureRecognizer(tapExistingInsurance)
@@ -141,7 +152,7 @@ class UserDetailViewController: UIViewController {
         }
         
         if let userFuneralHome = user.funeralHome {
-            funeralHomeNameLabel.text = funeralHome.homeName
+            funeralHomeNameLabel.text = userFuneralHome.homeName
             self.funeralHome = userFuneralHome
             let tapExistingFuneralHome = UITapGestureRecognizer(target: self, action: #selector(existingFuneralHomePressed))
             funeralHomeNameLabel.addGestureRecognizer(tapExistingFuneralHome)
@@ -172,7 +183,6 @@ class UserDetailViewController: UIViewController {
         container.addArrangedSubview(insuranceNameLabel)
         container.addArrangedSubview(funeralHomeLabel)
         container.addArrangedSubview(funeralHomeNameLabel)
-        
     }
     
     // MARK: - Objc Button Functions
@@ -183,24 +193,24 @@ class UserDetailViewController: UIViewController {
     
     /// To insurance detail view
     @objc func newInsuranceLabelPressed() {
-//        let newPerson = PersonalInfo(context: managedContext)
-        let nextVC = InsuranceViewController()
+//        let newInsurance = Insurance(context: managedContext)
+        user.insurance = Insurance(context: managedContext)
+        let nextVC = InsuranceViewController(insurance: user.insurance!, adding: true)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func existingInsuranceLabelPressed() {
-//        let newPerson = PersonalInfo(context: managedContext)
-        let nextVC = InsuranceViewController()
+        let nextVC = InsuranceViewController(insurance: self.insurance, adding: false)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     /// To funeral home detail view
     @objc func newFuneralHomePressed() {
-        let newFuneralHome = FuneralHome(context: managedContext)
-        let nextVC = FuneralHomeViewController(user: user, funeralHome: newFuneralHome, adding: true)
+        user.funeralHome = FuneralHome(context: managedContext)
+        let nextVC = FuneralHomeViewController(funeralHome: user.funeralHome!, adding: true)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func existingFuneralHomePressed() {
-        let nextVC = FuneralHomeViewController(user: user, funeralHome: funeralHome, adding: false)
+        let nextVC = FuneralHomeViewController(funeralHome: self.funeralHome, adding: false)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

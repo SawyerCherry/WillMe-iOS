@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="FuneralHome" representedClassName="FuneralHome" parentEntity="PersonalInfo" syncable="YES" codeGenerationType="class">
+    <entity name="FuneralHome" representedClassName="FuneralHome" syncable="YES" codeGenerationType="class">
         <attribute name="homeName" optional="YES" attributeType="String"/>
         <attribute name="preNeedsSet" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="siteLink" optional="YES" attributeType="URI"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonalInfo" inverseName="funeralHome" inverseEntity="PersonalInfo"/>
     </entity>
-    <entity name="Insurance" representedClassName="Insurance" parentEntity="PersonalInfo" syncable="YES" codeGenerationType="class">
+    <entity name="Insurance" representedClassName="Insurance" syncable="YES" codeGenerationType="class">
         <attribute name="policyNumber" optional="YES" attributeType="String"/>
         <attribute name="providerLink" optional="YES" attributeType="URI"/>
         <attribute name="providerName" optional="YES" attributeType="String"/>

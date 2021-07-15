@@ -80,7 +80,7 @@ class UsersViewController: UIViewController {
 }
 
 
-extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
+extension UsersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionInfo = fetchedResultsController.sections?[section] else {return 0}
         return sectionInfo.numberOfObjects
@@ -90,7 +90,8 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
         let user = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = "\(user.firstName ?? "name missing") \(user.lastName ?? "last name missing")"
-        cell.detailTextLabel?.text = "Hello? Is this working?"
+        cell.textLabel?.font = UIFont(name: "Helvetica-Light", size: 20)
+        cell.detailTextLabel?.text = "Hello? Is this thing on?"
 //        cell.detailTextLabel?.text = "\(user.tasksCompleted) tasks completed"
         return cell
     }
@@ -101,6 +102,10 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    
+}
+
+extension UsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -109,14 +114,16 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             print("Deleting")
             let userToDelete = fetchedResultsController.object(at: indexPath)
+            
             managedContext.delete(userToDelete)
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+            appDelegate.saveContext()
+        
             usersTableView.reloadData()
         } else if editingStyle == .insert {
             print("How'd you get here?")
         }
     }
-    
-    
 }
 
 extension UsersViewController: NSFetchedResultsControllerDelegate {

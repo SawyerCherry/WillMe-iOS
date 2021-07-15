@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import CoreData
 
 class InsuranceViewController: UIViewController {
-
+    
+    // MARK: - CoreData
+    var appDelegate: AppDelegate!
+    var managedContext: NSManagedObjectContext!
+    
     var insurance: Insurance!
+    var adding: Bool = true
+
     
     let container: UIStackView = {
         let container = UIStackView()
@@ -58,12 +65,35 @@ class InsuranceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
+        self.title = "Insurance"
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("In InsuranceViewController.viewDidLoad")
+        }
+        managedContext = appDelegate.persistentContainer.viewContext
+        
         setupUI()
-        // Do any additional setup after loading the view.
+    }
+    
+    convenience init(insurance: Insurance, adding: Bool) {
+        self.init()
+        self.insurance = insurance
+        self.adding = adding
+        
+        if !adding {
+            providerField.text = insurance.providerName
+            policyNumField.text = insurance.policyNumber
+        }
+        return
     }
     
 
     private func setupUI(){
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
+        
         self.view.addSubview(container)
     
         NSLayoutConstraint.activate ([
@@ -78,5 +108,31 @@ class InsuranceViewController: UIViewController {
         container.addArrangedSubview(policyNumField)
     }
    
-
+    @objc func saveButtonPressed() {
+        guard let name = providerField.text, let policy = policyNumField.text else {return}
+        self.insurance.providerName = name
+        self.insurance.policyNumber = policy
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("In InsuranceViewController.saveButtonPressed")
+        }
+        appDelegate.saveContext()
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        if adding {
+            // Delete new Insurance from managedObjectContext
+            managedContext.delete(insurance)
+            
+            // Still amazing how the managed context was saved successfully but I have to redeclare the AppDelegate every time.
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                fatalError("In InsuranceViewController.back")
+            }
+            appDelegate.saveContext()
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import CoreData
 
 class FuneralHomeViewController: UIViewController {
     
-    var user: PersonalInfo!
+    // MARK: - CoreData
+    var appDelegate: AppDelegate!
+    var managedContext: NSManagedObjectContext!
+    
     var funeralHome: FuneralHome!
     var adding: Bool = true
     
@@ -61,7 +65,7 @@ class FuneralHomeViewController: UIViewController {
         let control = UISegmentedControl(items: ["Yes", "No"])
         control.translatesAutoresizingMaskIntoConstraints = false
         control.selectedSegmentTintColor = UIColor(named: "spearmint")
-        
+        control.backgroundColor = UIColor(named: "darkSpearmint")
         return control
     }()
     
@@ -69,19 +73,31 @@ class FuneralHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("In FuneralHomeViewController.viewDidLoad")
+        }
+        managedContext = appDelegate.persistentContainer.viewContext
+        
+        preneedsControl.addTarget(self, action: #selector(changeAnswer(sender:)), for: .valueChanged)
         setupUI()
-        // Do any additional setup after loading the view.
     }
     
-    convenience init(user: PersonalInfo, funeralHome: FuneralHome, adding: Bool) {
+    convenience init(funeralHome: FuneralHome, adding: Bool) {
         self.init()
-        self.user = user
         self.funeralHome = funeralHome
         self.adding = adding
         
         if !adding {
             funeralHomeField.text = funeralHome.homeName
-//            preneedsControl
+            switch funeralHome.preNeedsSet {
+            case true:
+                print("Trying to set SegmentedControl to 'Yes'")
+                preneedsControl.selectedSegmentIndex = 0
+            case false:
+                print("Trying to set SegmentedControl to 'No")
+                preneedsControl.selectedSegmentIndex = 1
+            }
         }
         return
     }
@@ -98,7 +114,6 @@ class FuneralHomeViewController: UIViewController {
     
         NSLayoutConstraint.activate ([
             container.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 45),
-//            container.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -625),
             container.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 24),
             container.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -24)
         ])
@@ -110,7 +125,6 @@ class FuneralHomeViewController: UIViewController {
         
         NSLayoutConstraint.activate ([
             needsStack.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 125),
-//            needsStack.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -275),
             needsStack.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 24),
             needsStack.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -24),
             preneedsControl.topAnchor.constraint(equalTo: needsStack.topAnchor, constant: 80.0),
@@ -119,15 +133,52 @@ class FuneralHomeViewController: UIViewController {
             preneedsLabel.bottomAnchor.constraint(equalTo: needsStack.bottomAnchor, constant: -50.0),
             
         ])
-        
+                
+    }
+    
+    @objc func changeAnswer(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            funeralHome.preNeedsSet = true
+            print("Preneeds set to true")
+        case 1:
+            funeralHome.preNeedsSet = false
+            print("Preneeds set to false")
+        default:
+            print("You shouldn't be here")
+        }
     }
     
     @objc func saveButtonPressed() {
+        // Set the home's name to the string in the TextField
+        guard let name = funeralHomeField.text else {
+            fatalError("Where's the name?!?!")
+        }
+        funeralHome.homeName = name
+//        user.funeralHome?.homeName = name
+        // Make sure the home is linked to the user
+//        user.funeralHome = funeralHome
         
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("In FuneralHomeViewController.saveButtonPressed")
+        }
+        appDelegate.saveContext()
+        
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func back(sender: UIBarButtonItem) {
-        
+        if adding {
+            // Delete new funeralHome from managedObjectContext
+            managedContext.delete(funeralHome)
+            
+            // Amazing how the managed context was saved successfully but I have to redeclare the AppDelegate every time.
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                fatalError("In FuneralHomeViewController.back")
+            }
+            appDelegate.saveContext()
+        }
+        navigationController?.popViewController(animated: true)
     }
 
 }
