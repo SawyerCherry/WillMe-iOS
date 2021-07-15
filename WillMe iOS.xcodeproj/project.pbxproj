@@ -12,6 +12,8 @@
 		5010797C26991E1100F6BBD3 /* WillMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5010797A26991E1100F6BBD3 /* WillMe.xcdatamodeld */; };
 		F21DF63F269E11360061D6CA /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DF63E269E11360061D6CA /* PersonalInfoViewController.swift */; };
 		F21DF647269E7C5D0061D6CA /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21DF646269E7C5D0061D6CA /* UserDetailViewController.swift */; };
+		F25AA8D326A00EB300CE2930 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25AA8D126A00EB300CE2930 /* UserTableViewCell.swift */; };
+		F25AA8D426A00EB300CE2930 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F25AA8D226A00EB300CE2930 /* UserTableViewCell.xib */; };
 		F288E3EA269537120041C146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3E9269537120041C146 /* AppDelegate.swift */; };
 		F288E3EC269537120041C146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3EB269537120041C146 /* SceneDelegate.swift */; };
 		F288E3EE269537120041C146 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288E3ED269537120041C146 /* UsersViewController.swift */; };
@@ -25,6 +27,8 @@
 		5010797B26991E1100F6BBD3 /* WillMe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WillMe.xcdatamodel; sourceTree = "<group>"; };
 		F21DF63E269E11360061D6CA /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
 		F21DF646269E7C5D0061D6CA /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		F25AA8D126A00EB300CE2930 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		F25AA8D226A00EB300CE2930 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		F288E3E6269537120041C146 /* WillMe iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WillMe iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F288E3E9269537120041C146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F288E3EB269537120041C146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		F25AA8D026A00E7700CE2930 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F25AA8D126A00EB300CE2930 /* UserTableViewCell.swift */,
+				F25AA8D226A00EB300CE2930 /* UserTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F288E3DD269537120041C146 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +89,7 @@
 		F288E3E8269537120041C146 /* WillMe iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F25AA8D026A00E7700CE2930 /* View */,
 				F21DF640269E11460061D6CA /* Controller */,
 				F288E3E9269537120041C146 /* AppDelegate.swift */,
 				F288E3EB269537120041C146 /* SceneDelegate.swift */,
@@ -145,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F288E3F9269537130041C146 /* LaunchScreen.storyboard in Resources */,
+				F25AA8D426A00EB300CE2930 /* UserTableViewCell.xib in Resources */,
 				F288E3F6269537130041C146 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F288E3EE269537120041C146 /* UsersViewController.swift in Sources */,
+				F25AA8D326A00EB300CE2930 /* UserTableViewCell.swift in Sources */,
 				5010797C26991E1100F6BBD3 /* WillMe.xcdatamodeld in Sources */,
 				F21DF647269E7C5D0061D6CA /* UserDetailViewController.swift in Sources */,
 				5004A8C8269E86BD00A621DF /* InsuranceViewController.swift in Sources */,

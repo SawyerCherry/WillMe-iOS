@@ -74,8 +74,6 @@ class PersonalInfoViewController: UIViewController {
         return datePicker
     }()
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Create Profile"

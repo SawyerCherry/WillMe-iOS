@@ -33,17 +33,16 @@ class UsersViewController: UIViewController {
     lazy var usersTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "userCell")
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: "userCell")
         tableView.delegate = self
         tableView.dataSource = self
-        // MARK: - TODO: MAYBE ADD SOMETHING HERE
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemBackground
-        self.title = "Home"
+        self.title = "WillMe Family"
         // Create our managed context object by getting the context from the persistent container in the shared AppDelegae
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         managedContext = appDelegate.persistentContainer.viewContext
@@ -63,11 +62,12 @@ class UsersViewController: UIViewController {
         self.view.addSubview(usersTableView)
         
         NSLayoutConstraint.activate([
-            usersTableView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
+            usersTableView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 20),
             usersTableView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             usersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             usersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
+        
     }
     
     @objc func addUserButtonPressed() {
@@ -87,19 +87,28 @@ extension UsersViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
+        let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
         let user = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = "\(user.firstName ?? "name missing") \(user.lastName ?? "last name missing")"
-        cell.textLabel?.font = UIFont(name: "Helvetica-Light", size: 20)
-        cell.detailTextLabel?.text = "Hello? Is this thing on?"
-//        cell.detailTextLabel?.text = "\(user.tasksCompleted) tasks completed"
+        cell.textLabel?.font = UIFont(name: "Helvetica-Light", size: 25)
+        
+//        cell.backgroundColor = UIColor(named: "seaBlue")
+//
+//        cell.layer.shadowColor = UIColor.black.cgColor
+//        cell.layer.shadowOffset = CGSize(width: 0, height: 10)
+//        cell.layer.shadowOpacity = 1
+//        cell.layer.shadowRadius = 0
+//        cell.layer.masksToBounds = false
+        
+        cell.selectionStyle = .none
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = fetchedResultsController.object(at: indexPath)
-        let nextVC = UserDetailViewController(user: user)
-        self.navigationController?.pushViewController(nextVC, animated: true)
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
     
     
@@ -123,6 +132,13 @@ extension UsersViewController: UITableViewDelegate {
         } else if editingStyle == .insert {
             print("How'd you get here?")
         }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = fetchedResultsController.object(at: indexPath)
+        let nextVC = UserDetailViewController(user: user)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

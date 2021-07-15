@@ -31,7 +31,7 @@ class FuneralHomeViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Funeral Home:"
-        lbl.font = UIFont(name: "Helvetica-Light", size: 35.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 30.0)
         return lbl
     }()
     let funeralHomeField: UITextField = {
@@ -57,7 +57,7 @@ class FuneralHomeViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.text = "Have you made arrangements?"
-        lbl.font = UIFont(name: "Helvetica-Light", size: 15.0)
+        lbl.font = UIFont(name: "Helvetica-Light", size: 18.0)
         return lbl
     }()
     
