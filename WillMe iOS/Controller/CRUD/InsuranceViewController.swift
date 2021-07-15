@@ -86,7 +86,7 @@ class InsuranceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
-        self.title = "Insurance"
+        self.title = "Life Insurance"
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("In InsuranceViewController.viewDidLoad")

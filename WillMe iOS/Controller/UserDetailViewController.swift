@@ -80,7 +80,7 @@ class UserDetailViewController: UIViewController {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
-        lbl.text = "Insurance Provider:"
+        lbl.text = "Life Insurance Provider:"
         lbl.font = UIFont(name: "Helvetica-Light", size: 23.0)
         return lbl
     }()
